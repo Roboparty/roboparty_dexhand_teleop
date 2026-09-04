@@ -7,6 +7,9 @@
 Ubuntu 22.04 上从安装到“全身 + 双手”验收的完整步骤见
 [`docs/HAND_TELEOP_SOP.md`](docs/HAND_TELEOP_SOP.md)。
 
+只运行全身 GMR 与手柄遥操作时，可直接参考
+[`docs/FULL_BODY_CONTROLLER_SOP.md`](docs/FULL_BODY_CONTROLLER_SOP.md)。
+
 ## 系统边界
 
 ```text
