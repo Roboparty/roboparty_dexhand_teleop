@@ -1,0 +1,264 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="RP_Hand_Left">
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0.00074258 -0.0074101 0.047286" rpy="0 0 0" />
+      <mass value="0.10796" />
+      <inertia ixx="4.6383E-05" ixy="-3.2407E-08" ixz="1.9335E-07" iyy="6.715E-05" iyz="1.5535E-06" izz="3.0034E-05" />
+    </inertial>
+  </link>
+  <link name="finger11_link">
+    <inertial>
+      <origin xyz="0.0084275 0.0014873 0.00095853" rpy="0 0 0" />
+      <mass value="0.0027298" />
+      <inertia ixx="3.5725E-07" ixy="-7.4158E-09" ixz="-3.5014E-08" iyy="3.2865E-07" iyz="-1.169E-08" izz="1.0938E-07" />
+    </inertial>
+  </link>
+  <joint name="finger11" type="revolute">
+    <origin xyz="0.019352 0.0078052 0.03432" rpy="0 5.6618E-05 0" />
+    <parent link="base_link" />
+    <child link="finger11_link" />
+    <axis xyz="0 0 1" />
+    <limit lower="0" upper="1.75" effort="0" velocity="0" />
+  </joint>
+  <link name="finger12_link">
+    <inertial>
+      <origin xyz="-0.021058 0.028795 -0.019946" rpy="0 0 0" />
+      <mass value="0.15692" />
+      <inertia ixx="0.00030961" ixy="5.4172E-05" ixz="5.3321E-06" iyy="0.00013891" iyz="-3.9727E-05" izz="0.00022363" />
+    </inertial>
+  </link>
+  <joint name="finger12" type="revolute">
+    <origin xyz="0.015 0.0024172 0.0067143" rpy="1.1789 0.2618 1.5708" />
+    <parent link="finger11_link" />
+    <child link="finger12_link" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.40" effort="0" velocity="0" />
+  </joint>
+  <link name="finger13_link">
+    <inertial>
+      <origin xyz="2.0798E-05 -0.0010263 0.0087715" rpy="0 0 0" />
+      <mass value="0.0051235" />
+      <inertia ixx="2.4095E-07" ixy="-4.7789E-10" ixz="-9.7647E-10" iyy="3.0808E-07" iyz="-2.5035E-09" izz="1.6137E-07" />
+    </inertial>
+  </link>
+  <joint name="finger13" type="revolute">
+    <origin xyz="0 0 0.040273" rpy="0 0 0" />
+    <parent link="finger12_link" />
+    <child link="finger13_link" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.13" effort="0" velocity="0" />
+    <mimic joint="finger12" multiplier="0.929" offset="-0.015082" />
+  </joint>
+  <link name="finger14_link">
+    <inertial>
+      <origin xyz="-3.8304E-06 0.0042573 0.012288" rpy="0 0 0" />
+      <mass value="0.0024051" />
+      <inertia ixx="6.5145E-08" ixy="-3.3333E-10" ixz="-5.3723E-10" iyy="9.9513E-08" iyz="4.5334E-09" izz="5.5445E-08" />
+    </inertial>
+  </link>
+  <joint name="finger14" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="finger13_link" />
+    <child link="finger14_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="finger21_link">
+    <inertial>
+      <origin xyz="3.7099E-06 -0.00011919 0.014618" rpy="0 0 0" />
+      <mass value="0.003938" />
+      <inertia ixx="3.1596E-07" ixy="-4.1456E-11" ixz="-5.5676E-11" iyy="3.4221E-07" iyz="-2.8999E-08" izz="1.5546E-07" />
+    </inertial>
+  </link>
+  <joint name="finger21" type="revolute">
+    <origin xyz="0.026322 -0.0053264 0.083909" rpy="0.015713 0.09766 0.15979" />
+    <parent link="base_link" />
+    <child link="finger21_link" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.40" effort="0" velocity="0" />
+  </joint>
+  <link name="finger22_link">
+    <inertial>
+      <origin xyz="3.4856E-05 -0.0023817 0.010735" rpy="0 0 0" />
+      <mass value="0.0035951" />
+      <inertia ixx="3.7147E-07" ixy="7.6809E-11" ixz="-2.1746E-09" iyy="3.7949E-07" iyz="-1.1538E-08" izz="5.7613E-08" />
+    </inertial>
+  </link>
+  <joint name="finger22" type="revolute">
+    <origin xyz="0 0.0030778 0.027857" rpy="-0.11004 0 0" />
+    <parent link="finger21_link" />
+    <child link="finger22_link" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.75" effort="0" velocity="0" />
+    <mimic joint="finger21" multiplier="0.8847" offset="0.038265" />
+  </joint>
+  <link name="finger23_link">
+    <inertial>
+      <origin xyz="7.8368E-05 0.0020018 0.019395" rpy="0 0 0" />
+      <mass value="0.0019493" />
+      <inertia ixx="9.2479E-08" ixy="3.0475E-11" ixz="-2.7428E-11" iyy="9.8313E-08" iyz="-1.5567E-08" izz="2.6652E-08" />
+    </inertial>
+  </link>
+  <joint name="finger23" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="finger22_link" />
+    <child link="finger23_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="finger31_link">
+    <inertial>
+      <origin xyz="2.5591E-06 8.5087E-05 0.016695" rpy="0 0 0" />
+      <mass value="0.0046564" />
+      <inertia ixx="4.6404E-07" ixy="-6.6121E-11" ixz="-4.4012E-11" iyy="4.9011E-07" iyz="-4.5262E-08" izz="1.8452E-07" />
+    </inertial>
+  </link>
+  <joint name="finger31" type="revolute">
+    <origin xyz="0.0085306 -0.006534 0.088185" rpy="0.00071294 0.013408 0.053126" />
+    <parent link="base_link" />
+    <child link="finger31_link" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.40" effort="0" velocity="0" />
+  </joint>
+  <link name="finger32_link">
+    <inertial>
+      <origin xyz="5.3761E-07 -1.2538E-05 0.012568" rpy="0 0 0" />
+      <mass value="0.0039652" />
+      <inertia ixx="5.1368E-07" ixy="-4.1127E-10" ixz="-1.5216E-09" iyy="5.0101E-07" iyz="-1.0082E-07" izz="8.7117E-08" />
+    </inertial>
+  </link>
+  <joint name="finger32" type="revolute">
+    <origin xyz="0 0.0037175 0.032318" rpy="0 0 0" />
+    <parent link="finger31_link" />
+    <child link="finger32_link" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.75" effort="0" velocity="0" />
+    <mimic joint="finger31" multiplier="0.8485" offset="0.035946" />
+  </joint>
+  <link name="finger33_link">
+    <inertial>
+      <origin xyz="-2.1786E-06 0.0059988 0.02098" rpy="0 0 0" />
+      <mass value="0.0022728" />
+      <inertia ixx="1.4797E-07" ixy="1.6047E-11" ixz="-8.1878E-13" iyy="1.4043E-07" iyz="-4.353E-08" izz="4.3712E-08" />
+    </inertial>
+  </link>
+  <joint name="finger33" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="finger32_link" />
+    <child link="finger33_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="finger41_link">
+    <inertial>
+      <origin xyz="2.0328E-06 -0.00060204 0.014928" rpy="0 0 0" />
+      <mass value="0.0041427" />
+      <inertia ixx="3.621E-07" ixy="-4.6417E-11" ixz="-4.1481E-11" iyy="3.8957E-07" iyz="-3.1589E-08" izz="1.6169E-07" />
+    </inertial>
+  </link>
+  <joint name="finger41" type="revolute">
+    <origin xyz="-0.0088876 -0.0072813 0.087396" rpy="0.0030266 -0.061554 -0.049162" />
+    <parent link="base_link" />
+    <child link="finger41_link" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.40" effort="0" velocity="0" />
+  </joint>
+  <link name="finger42_link">
+    <inertial>
+      <origin xyz="2.8428E-05 -0.001525 0.011155" rpy="0 0 0" />
+      <mass value="0.0038285" />
+      <inertia ixx="3.9947E-07" ixy="-3.73E-11" ixz="-2.2809E-09" iyy="4.0449E-07" iyz="-3.5369E-08" izz="6.5075E-08" />
+    </inertial>
+  </link>
+  <joint name="finger42" type="revolute">
+    <origin xyz="0 0.0025283 0.02942" rpy="0 0 0" />
+    <parent link="finger41_link" />
+    <child link="finger42_link" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.75" effort="0" velocity="0" />
+    <mimic joint="finger41" multiplier="0.8321" offset="0.043170" />
+  </joint>
+  <link name="finger43_link">
+    <inertial>
+      <origin xyz="8.2647E-05 0.0034199 0.020014" rpy="0 0 0" />
+      <mass value="0.0019493" />
+      <inertia ixx="9.2476E-08" ixy="4.4007E-11" ixz="-6.2162E-11" iyy="9.5853E-08" iyz="-2.0306E-08" izz="2.9109E-08" />
+    </inertial>
+  </link>
+  <joint name="finger43" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="finger42_link" />
+    <child link="finger43_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="finger51_link">
+    <inertial>
+      <origin xyz="0.0005971 -0.0018425 0.013171" rpy="0 0 0" />
+      <mass value="0.0034504" />
+      <inertia ixx="2.3783E-07" ixy="-2.64E-10" ixz="-3.398E-09" iyy="2.6908E-07" iyz="-7.554E-09" izz="1.3534E-07" />
+    </inertial>
+  </link>
+  <joint name="finger51" type="revolute">
+    <origin xyz="-0.026448 -0.0055489 0.08298" rpy="-0.074855 -0.15057 -0.14704" />
+    <parent link="base_link" />
+    <child link="finger51_link" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.40" effort="0" velocity="0" />
+  </joint>
+  <link name="finger52_link">
+    <inertial>
+      <origin xyz="3.1581E-05 -0.0009964 0.0084913" rpy="0 0 0" />
+      <mass value="0.0034586" />
+      <inertia ixx="2.5318E-07" ixy="-6.386E-11" ixz="-1.0687E-09" iyy="2.5376E-07" iyz="-2.5784E-08" izz="6.4634E-08" />
+    </inertial>
+  </link>
+  <joint name="finger52" type="revolute">
+    <origin xyz="0 0 0.025024" rpy="0.097068 0 0" />
+    <parent link="finger51_link" />
+    <child link="finger52_link" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.75" effort="0" velocity="0" />
+    <mimic joint="finger51" multiplier="0.7349" offset="0.035218" />
+  </joint>
+  <link name="finger53_link">
+    <inertial>
+      <origin xyz="0.00010532 0.0043692 0.016718" rpy="0 0 0" />
+      <mass value="0.0014962" />
+      <inertia ixx="4.394E-08" ixy="4.4189E-11" ixz="2.3366E-10" iyy="4.5405E-08" iyz="-1.0753E-08" izz="2.1333E-08" />
+    </inertial>
+  </link>
+  <joint name="finger53" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="finger52_link" />
+    <child link="finger53_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="finger1_tip" />
+  <joint name="finger1_tip_joint" type="fixed">
+    <origin xyz="-1.14682514e-05 0.00237177763 0.0242441361" rpy="0 0 0" />
+    <parent link="finger14_link" />
+    <child link="finger1_tip" />
+  </joint>
+  <link name="finger2_tip" />
+  <joint name="finger2_tip_joint" type="fixed">
+    <origin xyz="0.000106940614 0.00352188327 0.032876403" rpy="0 0 0" />
+    <parent link="finger23_link" />
+    <child link="finger2_tip" />
+  </joint>
+  <link name="finger3_tip" />
+  <joint name="finger3_tip_joint" type="fixed">
+    <origin xyz="4.9176404e-05 0.0108280995 0.0359784476" rpy="0 0 0" />
+    <parent link="finger33_link" />
+    <child link="finger3_tip" />
+  </joint>
+  <link name="finger4_tip" />
+  <joint name="finger4_tip_joint" type="fixed">
+    <origin xyz="0.000125074374 0.00582113973 0.0333737407" rpy="0 0 0" />
+    <parent link="finger43_link" />
+    <child link="finger4_tip" />
+  </joint>
+  <link name="finger5_tip" />
+  <joint name="finger5_tip_joint" type="fixed">
+    <origin xyz="0.000218300586 0.00653969642 0.0274054287" rpy="0 0 0" />
+    <parent link="finger53_link" />
+    <child link="finger5_tip" />
+  </joint>
+</robot>

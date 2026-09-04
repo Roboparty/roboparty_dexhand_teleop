@@ -1,0 +1,51 @@
+# Preset poses are per-axis normalized closures (0 = preset_open, 1 = fully
+# closed along that axis' travel). Defaults make all six axes close together;
+# tune per-axis values experimentally once the axis-to-finger mapping of the
+# hand is confirmed on the bench.
+#
+# 预设语义: 每轴 0~1 对应编码值 0~10000 (乘以 counts 范围).
+# 轴1(下标0)在 open/grasp 中都为 0.8 => 恒定保持在 8000 就位.
+# 其余轴 0 -> 1 随扳机线性开合, 实际行程上限用 grasp_scale 实时调:
+#   ros2 param set /dexhand_teleop_left  grasp_scale 0.4   # 4000
+#   ros2 param set /dexhand_teleop_left  grasp_scale 0.6   # 6000
+#   ros2 param set /dexhand_teleop_left  grasp_scale 0.8   # 8000
+
+dexhand_teleop_left:
+    ros__parameters:
+        side: "left"
+        controller_topic: "/pico/controller/left/joy"
+        hand_pose_topic: "/pico/hand/left/poses"
+        hand_active_topic: "/pico/hand/left/active"
+        expected_frame_id: "xrobot_right_handed"
+        mode_topic: "/teleop/hand_mode"
+        input_mode: "controller"
+        enable_skeleton: true
+        transition_ms: 300.0
+        publish_hz: 50.0
+        input_timeout_ms: 250.0
+        cmd_topic: "/dexhand_left/cmd"
+        enable_grip_gesture: true
+        grasp_scale: 1.0
+        preset_open:  [0.8, 0.0, 0.0, 0.0, 0.0, 0.0]
+        preset_grasp: [0.8, 1.0, 1.0, 1.0, 1.0, 1.0]
+        preset_pinch: [0.8, 0.8, 0.8, 0.0, 0.0, 0.0]
+
+dexhand_teleop_right:
+    ros__parameters:
+        side: "right"
+        controller_topic: "/pico/controller/right/joy"
+        hand_pose_topic: "/pico/hand/right/poses"
+        hand_active_topic: "/pico/hand/right/active"
+        expected_frame_id: "xrobot_right_handed"
+        mode_topic: "/teleop/hand_mode"
+        input_mode: "controller"
+        enable_skeleton: true
+        transition_ms: 300.0
+        publish_hz: 50.0
+        input_timeout_ms: 250.0
+        cmd_topic: "/dexhand_right/cmd"
+        enable_grip_gesture: true
+        grasp_scale: 1.0
+        preset_open:  [0.8, 0.0, 0.0, 0.0, 0.0, 0.0]
+        preset_grasp: [0.8, 1.0, 1.0, 1.0, 1.0, 1.0]
+        preset_pinch: [0.8, 0.8, 0.8, 0.0, 0.0, 0.0]

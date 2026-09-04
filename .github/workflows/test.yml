@@ -1,0 +1,30 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  humble:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: ros-tooling/setup-ros@649ef6bcd696da05bc27ceb3fab69d810c0daeab
+        with:
+          required-ros-distributions: humble
+      - name: Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-nlopt python3-numpy python3-yaml ros-humble-pinocchio
+      - name: Build
+        run: |
+          source /opt/ros/humble/setup.bash
+          colcon build --base-paths . --packages-select roboparty_dexhand_teleop
+      - name: Test
+        run: |
+          source /opt/ros/humble/setup.bash
+          colcon test --base-paths . --packages-select roboparty_dexhand_teleop
+          colcon test-result --verbose

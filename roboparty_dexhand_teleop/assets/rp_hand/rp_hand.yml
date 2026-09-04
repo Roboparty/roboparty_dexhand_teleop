@@ -1,0 +1,17 @@
+left:
+  type: dexpilot
+  urdf_path: rp_hand/left/rp_hand_left.urdf
+  target_joint_names: [finger11, finger12, finger21, finger31, finger41, finger51]
+  wrist_link_name: base_link
+  finger_tip_link_names: [finger1_tip, finger2_tip, finger3_tip, finger4_tip, finger5_tip]
+  scaling_factor: 1.0
+  low_pass_alpha: 0.10
+
+right:
+  type: dexpilot
+  urdf_path: rp_hand/right/rp_hand_right.urdf
+  target_joint_names: [finger11, finger12, finger21, finger31, finger41, finger51]
+  wrist_link_name: base_link
+  finger_tip_link_names: [finger1_tip, finger2_tip, finger3_tip, finger4_tip, finger5_tip]
+  scaling_factor: 1.0
+  low_pass_alpha: 0.10
