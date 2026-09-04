@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Clarify `bash`/`zsh` ROS environment setup in the operator SOP.
+
 ## 0.1.1 - 2026-09-04
 
 - Isolate ROS bridge processes from incompatible user-site NumPy packages so

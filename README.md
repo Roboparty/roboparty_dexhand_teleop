@@ -42,6 +42,7 @@ Ubuntu 22.04 上从安装到“全身 + 双手”验收的完整步骤见
 ```bash
 sudo apt install ros-humble-pinocchio python3-nlopt python3-numpy
 
+# Bash 终端使用 setup.bash；如果当前终端是 zsh，请使用 setup.zsh。
 source /opt/ros/humble/setup.bash
 colcon build --symlink-install --packages-select roboparty_dexhand_teleop
 source install/setup.bash

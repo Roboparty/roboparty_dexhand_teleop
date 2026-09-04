@@ -4,6 +4,9 @@
 RP_Hand。当前机器人映射为左手 `can0`、右手 `can3`，两只手的 CAN Node ID
 均为 `1`。
 
+> 如果终端是 `zsh`，将下面的 `setup.bash` 替换为 `setup.zsh`；项目中的
+> `.sh` 启动脚本会自行使用 Bash。
+
 ## 1. 软件版本
 
 以下版本组成首个可复现组合：
@@ -11,7 +14,7 @@ RP_Hand。当前机器人映射为左手 `can0`、右手 `can3`，两只手的 C
 | 组件 | 最低版本 | 运行位置 | 职责 |
 | --- | --- | --- | --- |
 | `roboparty_teleop` | `0.1.0` | 操作端 | PICO 接入、全身 GMR、发布 `/pico/*` |
-| `roboparty_dexhand_teleop` | `0.1.0` | 操作端 | 手柄/骨骼到 RP_Hand 六轴目标 |
+| `roboparty_dexhand_teleop` | `0.1.1` | 操作端 | 手柄/骨骼到 RP_Hand 六轴目标 |
 | `roboparty_dexhand_ros` | `0.1.0` | 机器人板 | ROS 设备节点和双手生命周期 |
 | `roboparty_dexhand` | `0.4.2` | 机器人板 | C++/Python CAN-FD 驱动和真实回零确认 |
 
