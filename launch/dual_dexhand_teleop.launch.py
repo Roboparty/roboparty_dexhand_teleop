@@ -15,6 +15,12 @@ def generate_launch_description():
     grasp_scale = LaunchConfiguration("grasp_scale")
     input_mode = LaunchConfiguration("input_mode")
 
+    # ROS binary extensions such as Pinocchio are built against the system
+    # NumPy.  Keep user-site packages (which may contain an incompatible
+    # NumPy 2.x) out of the bridge process without changing the operator's
+    # main teleop/GMR environment.
+    ros_python_env = {"PYTHONNOUSERSITE": "1"}
+
     return LaunchDescription(
         [
             DeclareLaunchArgument(
@@ -53,6 +59,7 @@ def generate_launch_description():
                     config_file,
                     {"grasp_scale": grasp_scale, "input_mode": input_mode},
                 ],
+                additional_env=ros_python_env,
                 output="screen",
                 condition=IfCondition(left_enabled),
             ),
@@ -64,6 +71,7 @@ def generate_launch_description():
                     config_file,
                     {"grasp_scale": grasp_scale, "input_mode": input_mode},
                 ],
+                additional_env=ros_python_env,
                 output="screen",
                 condition=IfCondition(right_enabled),
             ),

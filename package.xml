@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>roboparty_dexhand_teleop</name>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <description>
     Maps canonical XR controller or hand-skeleton input to RP_Hand references.
   </description>

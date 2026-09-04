@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1 - 2026-09-04
+
+- Isolate ROS bridge processes from incompatible user-site NumPy packages so
+  Pinocchio-backed skeleton retargeting works with the system ROS binaries.
+
 ## 0.1.0 - 2026-09-04
 
 - Add independent left/right controller and skeleton teleoperation bridges.
