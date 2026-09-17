@@ -1,0 +1,16 @@
+[project]
+name = "roboparty-dexhand-teleop"
+version = "0.1.1"
+description = "Python environment for the RP_Hand ROS 2 teleoperation bridge"
+requires-python = ">=3.10,<3.11"
+dependencies = [
+    "numpy==1.26.4",
+    "pin==2.7.0",
+    "nlopt==2.7.1",
+]
+
+[tool.uv]
+# colcon / ament_python builds the ROS package using setup.py.
+# uv only manages Python dependencies; ROS, PyYAML and test tools come from apt.
+package = false
+environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
