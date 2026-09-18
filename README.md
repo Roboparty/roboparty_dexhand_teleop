@@ -336,6 +336,49 @@ ros2 topic hz /dexhand_left/cmd
 目标输出、超时停发和左右手骨骼求解。真实 PICO 链路与硬件运动仍需按 SOP 验收。
 退出映射节点使用 `Ctrl+C`；完整系统的停止顺序见手部 SOP。
 
+## 独立终端键盘控制全身跟随
+
+键盘节点运行在**操作端电脑**，调用 `roboparty_teleop` 的全身跟随服务。
+新增入口需要先按上文步骤重新构建本包。随后打开独立交互终端，在本仓库根目录运行：
+
+```bash
+source /opt/ros/humble/setup.bash
+export PYTHONNOUSERSITE=1
+source .venv/bin/activate
+source install/setup.bash
+ros2 run roboparty_dexhand_teleop teleop_keyboard
+```
+
+使用系统 apt 构建方案时，省略 `.venv` 激活，并改为加载
+`install-system/setup.bash`。
+
+- `a`：调用 `/start_teleop`，请求开启全身跟随。
+- `x`：调用 `/stop_teleop`，请求返回默认站姿参考。
+- `q` 或 `Ctrl+C`：只退出键盘程序；需要回站姿时先按 `x`。
+
+按键无需回车，操作时让键盘控制终端获得焦点。原有手部 launch 保持运行；
+键盘节点不放入 launch，也不切换手部模式或控制灵巧手启停。
+
+先在 `roboparty_teleop` 仓库中运行 `./scripts/rp1_deploy/run_local.sh`
+（详见 [全身运行说明](docs/FULL_BODY_CONTROLLER_SOP.md)），并确认对应
+`rp1_deploy` 配置启用了 `deploy.services: true`。
+普通 PICO 数据发布配置本身不提供这两个服务。两个进程须使用兼容的 ROS
+通信环境（包括相同的 `ROS_DOMAIN_ID`）。服务未就绪时不会缓存按键请求。
+可用 `ros2 service list -t` 确认 `/start_teleop` 和 `/stop_teleop` 均为
+`std_srvs/srv/Trigger`。跨机器运行时还需网络互通，且 `ROS_LOCALHOST_ONLY=0`。
+
+开启服务要求有新鲜 XR/GMR 参考；成功回复只表示接受过渡请求，不代表机器人
+已到位。`x` 是返回站姿参考，不是急停或电机断电。调用 5 秒未回复时
+显示超时，不自动重试，且请求可能已经执行。等待开启回复期间仍可按 `x`。
+
+如服务使用了命名空间，可通过参数指定：
+
+```bash
+ros2 run roboparty_dexhand_teleop teleop_keyboard --ros-args \
+  -p start_service:=/my_robot/start_teleop \
+  -p stop_service:=/my_robot/stop_teleop
+```
+
 ## 数据采集边界
 
 本包输出的是目标，不是真实硬件反馈。可复现数据集应同时记录：

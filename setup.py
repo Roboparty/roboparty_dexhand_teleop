@@ -51,6 +51,7 @@ setup(
     entry_points={
         "console_scripts": [
             "dexhand_teleop_bridge = roboparty_dexhand_teleop.dexhand_teleop_bridge:main",
+            "teleop_keyboard = roboparty_dexhand_teleop.teleop_keyboard:main",
         ],
     },
 )
