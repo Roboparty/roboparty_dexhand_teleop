@@ -25,31 +25,15 @@ RP_Hand。当前机器人映射为左手 `can0`、右手 `can3`，两只手的 C
 
 ### 2.1 操作端
 
-安装 ROS 2 Humble、XRoboToolkit PC Service、厂商 Python binding 以及项目依赖。
-Ubuntu 22.04 使用系统 Python 3.10：
+操作端的两个项目分别准备环境：
 
-```bash
-sudo apt update
-sudo apt install python3-colcon-common-extensions python3-nlopt python3-numpy \
-  python3-yaml ros-humble-pinocchio
+- `roboparty_teleop`：按其仓库说明安装 PICO、XRoboToolkit PC Service、厂商
+  Python binding 和全身 GMR 依赖。
+- `roboparty_dexhand_teleop`：按 [README 的安装步骤](../README.md#安装与构建)
+  使用独立 uv 环境，并在仓库根目录构建。
 
-cd ~/roboparty_teleop
-uv venv --python 3.10 --system-site-packages
-source .venv/bin/activate
-uv sync --extra test --extra ros2 --extra viewer --extra gmr
-```
-
-构建手部映射包：
-
-```bash
-mkdir -p ~/roboparty_ws/src
-cd ~/roboparty_ws/src
-git clone https://github.com/Roboparty/roboparty_dexhand_teleop.git
-
-cd ~/roboparty_ws
-source /opt/ros/humble/setup.bash
-colcon build --symlink-install --packages-select roboparty_dexhand_teleop
-```
+以下假设仓库分别位于 `~/roboparty_teleop` 和 `~/roboparty_dexhand_teleop`，
+请按实际位置调整。手部桥接无需复用全身 GMR 环境。
 
 ### 2.2 机器人板
 
@@ -136,13 +120,19 @@ source .venv/bin/activate
 打开第二个终端：
 
 ```bash
+cd ~/roboparty_dexhand_teleop
 source /opt/ros/humble/setup.bash
-source ~/roboparty_ws/install/setup.bash
+export PYTHONNOUSERSITE=1
+source .venv/bin/activate
+source install/setup.bash
+export ROS_DOMAIN_ID=0
+export ROS_LOCALHOST_ONLY=0
 
 ros2 launch roboparty_dexhand_teleop dual_dexhand_teleop.launch.py \
-  input_mode:=skeleton \
-  grasp_scale:=0.2
+  input_mode:=skeleton
 ```
+
+`grasp_scale` 不影响骨骼模式，骨骼目标按 URDF 关节范围映射到 0–10000。
 
 如需切换为手柄模式：
 
@@ -214,3 +204,7 @@ ros2 bag record \
 当前 `roboparty_dexhand_ros 0.1.0` 尚未发布带时间戳的真实位置和设备状态话题，
 因此上述 rosbag 只能证明输入和目标已经生成，不能证明真机每个关节实际到达。
 正式数据采集前需要先补齐板端状态消息。
+
+可复现的整机数据集还应包含板端六轴实际位置与设备状态，以及全身的
+`/action`、`/joint_states`、`/imu` 等策略输出和实际状态；按设备实际提供的话题
+补充录制列表。
